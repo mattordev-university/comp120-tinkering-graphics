@@ -28,33 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.GenerateBtn = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // GenerateBtn
+            // pictureBox1
             // 
-            this.GenerateBtn.Location = new System.Drawing.Point(357, 301);
-            this.GenerateBtn.Name = "GenerateBtn";
-            this.GenerateBtn.Size = new System.Drawing.Size(75, 23);
-            this.GenerateBtn.TabIndex = 0;
-            this.GenerateBtn.Text = "Generate";
-            this.GenerateBtn.UseVisualStyleBackColor = true;
+            this.pictureBox1.Location = new System.Drawing.Point(10, 15);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(622, 423);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.GenerateBtn);
+            this.ClientSize = new System.Drawing.Size(644, 450);
+            this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
             this.Text = "Forest fires are fake";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button GenerateBtn;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
