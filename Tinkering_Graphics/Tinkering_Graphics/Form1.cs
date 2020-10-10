@@ -21,7 +21,29 @@ namespace Tinkering_Graphics
         {
             string img = "D:\\_University\\GitHub\\comp120-tinkering-graphics\\Tinkering_Graphics\\forestFires.jpg";
             Bitmap bmp = new Bitmap(img);
-            pictureBox1.Image = bmp;
+            Bitmap reducedbmp = new Bitmap(bmp);
+
+            
+            for (int y = 0; y < reducedbmp.Height; y++)
+            {
+                for (int x = 0; x < reducedbmp.Width; x++)
+                {
+                    Color p = reducedbmp.GetPixel(x, y);
+                    int a = p.A;
+                    int r = p.R;
+                    int g = p.G;
+                    int b = p.B;
+
+                    int Modifiedr = Convert.ToInt32(r * .55);
+                    int Modifiedg = Convert.ToInt32(g * .65);
+                    int Modifiedb = Convert.ToInt32(b * 0);
+
+                    reducedbmp.SetPixel(x, y, Color.FromArgb(a, Modifiedr, Modifiedg, Modifiedb));
+                }
+            }
+
+            pictureBox2.Image = bmp;
+            pictureBox1.Image = reducedbmp;
         }
     }
 }
