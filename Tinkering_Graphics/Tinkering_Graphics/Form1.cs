@@ -19,9 +19,13 @@ namespace Tinkering_Graphics
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string img = "D:\\_University\\GitHub\\comp120-tinkering-graphics\\Tinkering_Graphics\\forestFires.jpg";
-            Bitmap bmp = new Bitmap(img);
-            Bitmap reducedbmp = new Bitmap(bmp);
+            string img = "D:\\_University\\GitHub\\comp120-tinkering-graphics\\Tinkering_Graphics\\forestFires.jpg"; // call image - needs to be portable
+            Bitmap bmp = new Bitmap(img); // creates bitmap variable to hold the pixel data for the graphical image "img" called above
+
+            Bitmap reducedbmp = new Bitmap(bmp); 
+            /* this makes a clone of the orginal bmp bitmap variable above, 
+            it is named "reducedbmp" as this is the image that will be turning less orange 
+            a clone is made so that, as the coder, we can easily ensure a visual difference has been made */
 
             
             for (int y = 0; y < reducedbmp.Height; y++)
@@ -34,12 +38,18 @@ namespace Tinkering_Graphics
                     int g = p.G;
                     int b = p.B;
 
-                    int Modifiedr = Convert.ToInt32(r * .55);
-                    int Modifiedg = Convert.ToInt32(g * .65);
-                    int Modifiedb = Convert.ToInt32(b * 0);
+                    int modifiedR = Convert.ToInt32(r * .3);
+                    int modifiedG = Convert.ToInt32(g * .4);
+                    int modifiedB = Convert.ToInt32(b * .7);
+                    /* above are the modifed variables used to edit the colour intensity in the picture
+                    as the orange intensity in the picture needs to be decreased both red and green changed - blue a lot less*/
 
-                    reducedbmp.SetPixel(x, y, Color.FromArgb(a, Modifiedr, Modifiedg, Modifiedb));
+                    reducedbmp.SetPixel(x, y, Color.FromArgb(a, modifiedR, modifiedG, modifiedB));
+                    // at each pixel, it will be set to the same rgb value but r and g are reduced
+                    // this makes the forest fires look more "fake"
                 }
+
+
             }
 
             pictureBox2.Image = bmp;
