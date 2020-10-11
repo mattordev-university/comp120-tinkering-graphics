@@ -19,31 +19,34 @@ namespace Tinkering_Graphics
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string img = "D:\\_University\\GitHub\\comp120-tinkering-graphics\\Tinkering_Graphics\\forestFires.jpg";
+            string img = "D:\\_University\\GitHub\\comp120-tinkering-graphics\\Tinkering_Graphics\\forestFires.jpg"; // Need to make this universal across systems
             Bitmap bmp = new Bitmap(img);
-            Bitmap reducedbmp = new Bitmap(bmp);
-
+            Bitmap reducedBMP = new Bitmap(bmp);
             
-            for (int y = 0; y < reducedbmp.Height; y++)
+            for (int y = 0; y < reducedBMP.Height; y++)
             {
-                for (int x = 0; x < reducedbmp.Width; x++)
+                for (int x = 0; x < reducedBMP.Width; x++)
                 {
-                    Color p = reducedbmp.GetPixel(x, y);
+                    // Create a color, and then asign each channel of that color an int for later use.
+                    Color p = reducedBMP.GetPixel(x, y);
                     int a = p.A;
                     int r = p.R;
                     int g = p.G;
                     int b = p.B;
 
-                    int Modifiedr = Convert.ToInt32(r * .55);
-                    int Modifiedg = Convert.ToInt32(g * .65);
-                    int Modifiedb = Convert.ToInt32(b * 0);
+                    int modifiedR = Convert.ToInt32(r * .55);
+                    int modifiedG = Convert.ToInt32(g * .65);
+                    int modifiedB = Convert.ToInt32(b * 0);
 
-                    reducedbmp.SetPixel(x, y, Color.FromArgb(a, Modifiedr, Modifiedg, Modifiedb));
+                    /* set the pixels of the "modified" bmp to the actual modified R, G and B values
+                    Notice that we are not change the Alpha value here because it is not needed, so we just leave it as "a"*/
+                    reducedBMP.SetPixel(x, y, Color.FromArgb(a, modifiedR, modifiedG, modifiedB));
                 }
             }
 
+            // Here we set the the two picture boxs on the form to equal the actual BMP and modifiedBMP.
             pictureBox2.Image = bmp;
-            pictureBox1.Image = reducedbmp;
+            pictureBox1.Image = reducedBMP;
         }
     }
 }
