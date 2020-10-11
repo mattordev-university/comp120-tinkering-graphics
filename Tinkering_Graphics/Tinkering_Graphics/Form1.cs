@@ -22,7 +22,7 @@ namespace Tinkering_Graphics
             string img = "D:\\_University\\GitHub\\comp120-tinkering-graphics\\Tinkering_Graphics\\forestFires.jpg"; // call image - needs to be portable
             Bitmap bmp = new Bitmap(img); // creates bitmap variable to hold the pixel data for the graphical image "img" called above
 
-            Bitmap reducedbmp = new Bitmap(bmp); 
+            Bitmap reducedBMP = new Bitmap(bmp); 
             /* this makes a clone of the orginal bmp bitmap variable above, 
             it is named "reducedbmp" as this is the image that will be turning less orange 
             a clone is made so that, as the coder, we can easily ensure a visual difference has been made */
@@ -44,7 +44,7 @@ namespace Tinkering_Graphics
                     /* above are the modifed variables used to edit the colour intensity in the picture
                     as the orange intensity in the picture needs to be decreased both red and green changed - blue a lot less*/
 
-                    reducedbmp.SetPixel(x, y, Color.FromArgb(a, modifiedR, modifiedG, modifiedB));
+                    reducedBMP.SetPixel(x, y, Color.FromArgb(a, modifiedR, modifiedG, modifiedB));
                     // at each pixel, it will be set to the same rgb value but r and g are reduced
                     // this makes the forest fires look more "fake"
 
