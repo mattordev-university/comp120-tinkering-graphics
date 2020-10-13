@@ -80,16 +80,16 @@ namespace Tinkering_Graphics
             pictureBox1.Image = reducedBMP;
         }
 
-        private static bool colourDistance(Color first, Color second)
+        private static bool colourDistance(Color pColour, Color imgColour)
         {
             int redDiff;
             int greenDiff;
             int BlueDiff;
             double sqrt;
 
-            redDiff = first.R - second.R;
-            greenDiff = first.G - second.G;
-            BlueDiff = first.B - second.B;
+            redDiff = pColour.R - imgColour.R;
+            greenDiff = pColour.G - imgColour.G;
+            BlueDiff = pColour.B - imgColour.B;
 
             sqrt = Math.Sqrt((redDiff * redDiff) + (greenDiff * greenDiff) + (BlueDiff * BlueDiff));
 
