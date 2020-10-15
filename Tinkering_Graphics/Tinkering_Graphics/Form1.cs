@@ -12,7 +12,7 @@ namespace Tinkering_Graphics
 {
     public partial class Form1 : Form
     {
-        string img = "D:\\_University\\GitHub\\comp120-tinkering-graphics\\Tinkering_Graphics\\forestFires.jpg"; // call image - needs to be portable
+        public string img = "D:\\_University\\GitHub\\comp120-tinkering-graphics\\Tinkering_Graphics\\forestFires.jpg"; // call image - needs to be portable
         public Form1()
         {
             InitializeComponent();
@@ -45,7 +45,7 @@ namespace Tinkering_Graphics
                     int g = p.G;
                     int b = p.B;
 
-                    if (colourDistance(p, Color.Orange) == true)
+                    if (ColourDistance(p, Color.Orange) == true)
                     {
                         int modifiedR = Convert.ToInt32(r * .3);
                         int modifiedG = Convert.ToInt32(g * .4);
@@ -79,7 +79,7 @@ namespace Tinkering_Graphics
             pictureBox1.Image = reducedBMP;
         }
 
-        private static bool colourDistance(Color pColour, Color imgColour)
+        private static bool ColourDistance(Color pColour, Color imgColour)
         {
             int redDiff;
             int greenDiff;
