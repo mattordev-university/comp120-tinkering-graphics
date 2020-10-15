@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,7 +13,9 @@ namespace Tinkering_Graphics
 {
     public partial class Form1 : Form
     {
-        public string img = "G:\\GitRepos\\comp120-tinkering-graphics\\Tinkering_Graphics\\forestFires.jpg"; // call image - needs to be portable. Will be doing soon
+        //This is no longer required! For using images, please now use `Resource1.forestFires` instead (refer to examples in the code below if needed).
+        //public string img = "G:\\GitRepos\\comp120-tinkering-graphics\\Tinkering_Graphics\\forestFires.jpg";
+
         public Form1()
         {
             InitializeComponent();
@@ -21,13 +24,13 @@ namespace Tinkering_Graphics
         private void Form1_Load(object sender, EventArgs e)
         {
             //This is just so we can show what the image looks like beforehand.
-            Bitmap bmp = new Bitmap(img);
+            Bitmap bmp = new Bitmap(Resource1.forestFires);
             pictureBox1.Image = bmp;
         }
 
-        private void Posterization(string img)
+        private void Posterization()
         {
-            Bitmap bmp = new Bitmap(img); // creates bitmap variable to hold the pixel data for the graphical image "img" called above
+            Bitmap bmp = new Bitmap(Resource1.forestFires); // creates bitmap variable to hold the pixel data for the graphical image "img" called above
 
             Bitmap reducedBMP = new Bitmap(bmp);
             /* this makes a clone of the orginal bmp bitmap variable above, 
@@ -118,7 +121,7 @@ namespace Tinkering_Graphics
         private void EffectButton_Click(object sender, EventArgs e)
         {
             // Do the thing to make fires go brrr
-            Posterization(img);
+            Posterization();
         }
 
         private void DescriptionBox_Enter(object sender, EventArgs e)
