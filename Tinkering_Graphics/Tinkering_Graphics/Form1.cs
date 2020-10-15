@@ -105,6 +105,16 @@ namespace Tinkering_Graphics
             }
         }
 
+        private void Luminance()
+        {
+
+        }
+
+        private void ColourTolerance(Color color, Color pixel, int threshold)
+        {
+
+        }
+
         private void EffectButton_Click(object sender, EventArgs e)
         {
             // Do the thing to make fires go brrr
