@@ -12,7 +12,7 @@ namespace Tinkering_Graphics
 {
     public partial class Form1 : Form
     {
-        public string img = "D:\\_University\\GitHub\\comp120-tinkering-graphics\\Tinkering_Graphics\\forestFires.jpg"; // call image - needs to be portable
+        public string img = "G:\\GitRepos\\comp120-tinkering-graphics\\Tinkering_Graphics\\forestFires.jpg"; // call image - needs to be portable. Will be doing soon
         public Form1()
         {
             InitializeComponent();
@@ -119,6 +119,11 @@ namespace Tinkering_Graphics
         {
             // Do the thing to make fires go brrr
             Posterization(img);
+        }
+
+        private void DescriptionBox_Enter(object sender, EventArgs e)
+        {
+            ActiveControl = null;
         }
     }
 }

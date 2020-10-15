@@ -32,8 +32,9 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Title = new System.Windows.Forms.Label();
             this.DescTitle = new System.Windows.Forms.Label();
-            this.Description = new System.Windows.Forms.TextBox();
             this.EffectButton = new System.Windows.Forms.Button();
+            this.Description = new System.Windows.Forms.Label();
+            this.DescriptionBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,16 +66,6 @@
             this.DescTitle.TabIndex = 2;
             this.DescTitle.Text = "What does this program do?";
             // 
-            // Description
-            // 
-            this.Description.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Description.Location = new System.Drawing.Point(673, 70);
-            this.Description.Multiline = true;
-            this.Description.Name = "Description";
-            this.Description.Size = new System.Drawing.Size(290, 335);
-            this.Description.TabIndex = 3;
-            this.Description.Text = resources.GetString("Description.Text");
-            // 
             // EffectButton
             // 
             this.EffectButton.Location = new System.Drawing.Point(673, 451);
@@ -85,13 +76,35 @@
             this.EffectButton.UseVisualStyleBackColor = true;
             this.EffectButton.Click += new System.EventHandler(this.EffectButton_Click);
             // 
+            // Description
+            // 
+            this.Description.Location = new System.Drawing.Point(0, 0);
+            this.Description.Name = "Description";
+            this.Description.Size = new System.Drawing.Size(100, 23);
+            this.Description.TabIndex = 8;
+            // 
+            // DescriptionBox
+            // 
+            this.DescriptionBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DescriptionBox.Location = new System.Drawing.Point(673, 70);
+            this.DescriptionBox.Multiline = true;
+            this.DescriptionBox.Name = "DescriptionBox";
+            this.DescriptionBox.ReadOnly = true;
+            this.DescriptionBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.DescriptionBox.Size = new System.Drawing.Size(290, 356);
+            this.DescriptionBox.TabIndex = 7;
+            this.DescriptionBox.TabStop = false;
+            this.DescriptionBox.Text = resources.GetString("DescriptionBox.Text");
+            this.DescriptionBox.Enter += new System.EventHandler(this.DescriptionBox_Enter);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(980, 505);
-            this.Controls.Add(this.EffectButton);
+            this.Controls.Add(this.DescriptionBox);
             this.Controls.Add(this.Description);
+            this.Controls.Add(this.EffectButton);
             this.Controls.Add(this.DescTitle);
             this.Controls.Add(this.Title);
             this.Controls.Add(this.pictureBox1);
@@ -109,8 +122,9 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label Title;
         private System.Windows.Forms.Label DescTitle;
-        private System.Windows.Forms.TextBox Description;
         private System.Windows.Forms.Button EffectButton;
+        private System.Windows.Forms.Label Description;
+        private System.Windows.Forms.TextBox DescriptionBox;
     }
 }
 
