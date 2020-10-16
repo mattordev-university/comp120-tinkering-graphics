@@ -107,13 +107,28 @@ namespace Tinkering_Graphics
 
         private void Luminance()
         {
+            // colour = (r, g, b)
+            // must be 0 =< colour =< 255
 
+            // L = sum of all colour channels (r g b) / divided by 3
         }
 
         private void ColourTolerance(Color color, Color pixel, int threshold)
         {
+            // threshold t = 0 =< t =< 255  
+            // returns bool
 
+            // colour RGB = tuple(r = 0 =< r =< 255, g = 0 =g t =< 255, b 0 =< b =< 255)
+            // pixel RGB= tuple(r = 0 =< r =< 255, g = 0 =g t =< 255, b 0 =< b =< 255)
+
+
+            // distance d = sum of(c0 - p0)^2 + (c1 - p2)^2 + (c2 - p2)^2)
+
+            // if d < t then
+            // return true
+            // else return false
         }
+
 
         private void EffectButton_Click(object sender, EventArgs e)
         {
