@@ -14,7 +14,7 @@ namespace Tinkering_Graphics
     public partial class Form1 : Form
     {
         //This is no longer required! For using images, please now use `Resource1.forestFires` instead (refer to examples in the code below if needed).
-        public string img = "G:\\GitRepos\\comp120-tinkering-graphics\\Tinkering_Graphics\\forestFires.jpg";
+        //public string img = "G:\\GitRepos\\comp120-tinkering-graphics\\Tinkering_Graphics\\forestFires.jpg";
 
         public Form1()
         {
@@ -30,7 +30,7 @@ namespace Tinkering_Graphics
 
         private void Posterization()
         {
-            Bitmap bmp = new Bitmap(img); // creates bitmap variable to hold the pixel data for the graphical image "img" called above
+            Bitmap bmp = new Bitmap(Resource1.forestFires); // creates bitmap variable to hold the pixel data for the graphical image "img" called above
 
             Bitmap reducedBMP = new Bitmap(bmp);
             /* this makes a clone of the orginal bmp bitmap variable above, 
