@@ -116,20 +116,42 @@ namespace Tinkering_Graphics
             // L = sum of all colour channels (r g b) / divided by 3
         }
 
-        private void ColourTolerance(Color color, Color pixel, int threshold)
+        private bool ColourTolerance(Color color, Color pixel, int t)
         {
             // threshold t = 0 =< t =< 255  
             // returns bool
+            if (t >= 0 && t <= 255)
+            {
+                Console.WriteLine(true);
+            }
+            else
+            {
+                Console.WriteLine(false);
+            }
+
 
             // colour RGB = tuple(r = 0 =< r =< 255, g = 0 =g t =< 255, b 0 =< b =< 255)
+
             // pixel RGB= tuple(r = 0 =< r =< 255, g = 0 =g t =< 255, b 0 =< b =< 255)
 
 
             // distance d = sum of(c0 - p0)^2 + (c1 - p2)^2 + (c2 - p2)^2)
+            int d = ((color.R - pixel.R) ^ 2 + (color.G - pixel.G) ^ 2 + (color.B - pixel.B) ^ 2);
 
             // if d < t then
             // return true
             // else return false
+
+            if (d < t)
+            {
+                return true;
+
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
 
