@@ -63,6 +63,16 @@ namespace Tinkering_Graphics {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Fire5 {
+            get {
+                object obj = ResourceManager.GetObject("Fire5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap forestFires {
             get {
                 object obj = ResourceManager.GetObject("forestFires", resourceCulture);
