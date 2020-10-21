@@ -40,7 +40,6 @@ namespace Tinkering_Graphics
 
             greyscale(reducedBMP);
 
-            
             for (int y = 0; y < reducedBMP.Height; y++)
             {
                 for (int x = 0; x < reducedBMP.Width; x++)
@@ -56,10 +55,12 @@ namespace Tinkering_Graphics
                     int modifiedB = Convert.ToInt32(b * 0);
 
                     reducedBMP.SetPixel(x, y, Color.FromArgb(a, modifiedR, modifiedG, 50));
+                    
                 }
             }
 
             lessYellow(reducedBMP);
+
 
             // Here we set the the picture box on the form to equal the modifiedBMP.
             pictureBox1.Image = reducedBMP;
@@ -83,13 +84,12 @@ namespace Tinkering_Graphics
                     int modifiedG = Convert.ToInt32(g * .5);
                     int modifiedB = Convert.ToInt32(b * 0);
 
-                    if (ColourTolerance(p, Color.FromArgb(a, 255, 255, 0), 170) == true)
+                    if (ColourTolerance(p, Color.FromArgb(a, 255, 255, 0), 190) == true)
                     {
-                        reducedBMP.SetPixel(x, y, Color.FromArgb(a, r, g, 100));
+                        reducedBMP.SetPixel(x, y, Color.FromArgb(a, r, g, 75));
                     }
-                    
+
                     //reducedBMP.SetPixel(x, y, Color.FromArgb(a, modifiedR, modifiedG, 150));
-                    
 
                 }
             }
@@ -167,16 +167,51 @@ namespace Tinkering_Graphics
 
         }
 
-        private int Luminance(Color color)
+        private static double Luminance(Color color)
         {
             // colour = (r, g, b)
             // must be 0 =< colour =< 255
 
             // L = sum of all colour channels (r g b) / divided by 3
-            int l = ((color.R + color.G + color.B) / 3);
+            double l = ((color.R + color.G + color.B) / 3);
             return l;
         }
 
+        private static Bitmap increaseLuminance(double l, Bitmap reducedBMP)
+        {
+            for (int y = 0; y < reducedBMP.Height; y++)
+            {
+                for (int x = 0; x < reducedBMP.Width; x++)
+                {
+                    Color p = reducedBMP.GetPixel(x, y);
+                    int a = p.A;
+                    int r = p.R;
+                    int g = p.G;
+                    int b = p.B;
+
+                    int modifiedR = Convert.ToInt32(r * 1.1);
+                    int modifiedG = Convert.ToInt32(g * 1.1);
+                    int modifiedB = Convert.ToInt32(b * 1.1);
+
+                    if (modifiedR > 255)
+                    {
+                        modifiedR = 255;
+                    }
+                    if (modifiedG > 255)
+                    {
+                        modifiedG = 255;
+                    }
+                    if (modifiedB > 255)
+                    {
+                        modifiedB = 255;
+                    }
+
+                    reducedBMP.SetPixel(x, y, Color.FromArgb(a, modifiedR, modifiedG, modifiedB));
+                }
+            }
+
+            return reducedBMP;
+        }
         
 
 
