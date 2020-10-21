@@ -24,13 +24,13 @@ namespace Tinkering_Graphics
         private void Form1_Load(object sender, EventArgs e)
         {
             //This is just so we can show what the image looks like beforehand.
-            Bitmap bmp = new Bitmap(Resource1.forestFires);
+            Bitmap bmp = new Bitmap(Resource1.Fire5);
             pictureBox1.Image = bmp;
         }
 
         private void Posterization()
         {
-            Bitmap bmp = new Bitmap(Resource1.forestFires); // creates bitmap variable to hold the pixel data for the graphical image "img" called above
+            Bitmap bmp = new Bitmap(Resource1.Fire5); // creates bitmap variable to hold the pixel data for the graphical image "img" called above
 
             Bitmap reducedBMP = new Bitmap(bmp);
 
@@ -39,11 +39,14 @@ namespace Tinkering_Graphics
             a clone is made so that, as the coder, we can easily ensure a visual difference has been made */
 
             greyscale(reducedBMP);
+            // turns the image greyscale to mute the orange values for easier editing later on
+            // without greyscale the image will turn out much pinker
 
             for (int y = 0; y < reducedBMP.Height; y++)
             {
                 for (int x = 0; x < reducedBMP.Width; x++)
                 {
+                    // this new for loop is important to grab the new greyscaled pixels
                     Color p = reducedBMP.GetPixel(x, y);
                     int a = p.A;
                     int r = p.R;
@@ -55,12 +58,12 @@ namespace Tinkering_Graphics
                     int modifiedB = Convert.ToInt32(b * 0);
 
                     reducedBMP.SetPixel(x, y, Color.FromArgb(a, modifiedR, modifiedG, 50));
-                    
+                    // use posterization for editing every pixel on img to a base level
                 }
             }
 
             lessYellow(reducedBMP);
-
+            // with increase the B value of specific areas on the img
 
             // Here we set the the picture box on the form to equal the modifiedBMP.
             pictureBox1.Image = reducedBMP;
@@ -74,23 +77,18 @@ namespace Tinkering_Graphics
             {
                 for (int x = 0; x < reducedBMP.Width; x++)
                 {
+                    // this new for loop is important to grab the new greyscaled pixels
                     Color p = reducedBMP.GetPixel(x, y);
                     int a = p.A;
                     int r = p.R;
                     int g = p.G;
                     int b = p.B;
 
-                    int modifiedR = Convert.ToInt32(r * .5);
-                    int modifiedG = Convert.ToInt32(g * .5);
-                    int modifiedB = Convert.ToInt32(b * 0);
-
                     if (ColourTolerance(p, Color.FromArgb(a, 255, 255, 0), 190) == true)
                     {
                         reducedBMP.SetPixel(x, y, Color.FromArgb(a, r, g, 75));
                     }
-
-                    //reducedBMP.SetPixel(x, y, Color.FromArgb(a, modifiedR, modifiedG, 150));
-
+                   
                 }
             }
 
@@ -149,6 +147,7 @@ namespace Tinkering_Graphics
             }
         }
 
+
         private static bool ColourTolerance(Color pixel, Color color, int t)
         {
 
@@ -158,7 +157,6 @@ namespace Tinkering_Graphics
             if (d < t)
             {
                 return true;
-
             }
             else
             {
@@ -177,6 +175,9 @@ namespace Tinkering_Graphics
             return l;
         }
 
+
+        // attempted at a function to increase the brightness of an image to make the image look better
+        // not in use
         private static Bitmap increaseLuminance(double l, Bitmap reducedBMP)
         {
             for (int y = 0; y < reducedBMP.Height; y++)
