@@ -51,7 +51,7 @@
             // 
             this.Title.AutoSize = true;
             this.Title.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Title.Location = new System.Drawing.Point(7, 23);
+            this.Title.Location = new System.Drawing.Point(11, 74);
             this.Title.Name = "Title";
             this.Title.Size = new System.Drawing.Size(89, 25);
             this.Title.TabIndex = 1;
@@ -61,7 +61,7 @@
             // 
             this.DescTitle.AutoSize = true;
             this.DescTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DescTitle.Location = new System.Drawing.Point(668, 23);
+            this.DescTitle.Location = new System.Drawing.Point(648, 74);
             this.DescTitle.Name = "DescTitle";
             this.DescTitle.Size = new System.Drawing.Size(308, 25);
             this.DescTitle.TabIndex = 2;
@@ -69,7 +69,7 @@
             // 
             // EffectButton
             // 
-            this.EffectButton.Location = new System.Drawing.Point(673, 451);
+            this.EffectButton.Location = new System.Drawing.Point(656, 421);
             this.EffectButton.Name = "EffectButton";
             this.EffectButton.Size = new System.Drawing.Size(290, 42);
             this.EffectButton.TabIndex = 5;
@@ -87,12 +87,12 @@
             // DescriptionBox
             // 
             this.DescriptionBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DescriptionBox.Location = new System.Drawing.Point(673, 70);
+            this.DescriptionBox.Location = new System.Drawing.Point(649, 106);
             this.DescriptionBox.Multiline = true;
             this.DescriptionBox.Name = "DescriptionBox";
             this.DescriptionBox.ReadOnly = true;
             this.DescriptionBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.DescriptionBox.Size = new System.Drawing.Size(290, 356);
+            this.DescriptionBox.Size = new System.Drawing.Size(310, 309);
             this.DescriptionBox.TabIndex = 7;
             this.DescriptionBox.TabStop = false;
             this.DescriptionBox.Text = resources.GetString("DescriptionBox.Text");

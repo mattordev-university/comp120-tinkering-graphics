@@ -24,13 +24,13 @@ namespace Tinkering_Graphics
         private void Form1_Load(object sender, EventArgs e)
         {
             //This is just so we can show what the image looks like beforehand.
-            Bitmap bmp = new Bitmap(Resource1.Fire5);
+            Bitmap bmp = new Bitmap(Resource1.orangeSkyBridgeFires);
             pictureBox1.Image = bmp;
         }
 
         private void Posterization()
         {
-            Bitmap bmp = new Bitmap(Resource1.Fire5); // creates bitmap variable to hold the pixel data for the graphical image "img" called above
+            Bitmap bmp = new Bitmap(Resource1.orangeSkyBridgeFires); // creates bitmap variable to hold the pixel data for the graphical image "img" called above
 
             Bitmap reducedBMP = new Bitmap(bmp);
 
