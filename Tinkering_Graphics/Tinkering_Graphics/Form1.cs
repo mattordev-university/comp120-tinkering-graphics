@@ -33,11 +33,73 @@ namespace Tinkering_Graphics
             Bitmap bmp = new Bitmap(Resource1.forestFires); // creates bitmap variable to hold the pixel data for the graphical image "img" called above
 
             Bitmap reducedBMP = new Bitmap(bmp);
-            
+
             /* this makes a clone of the orginal bmp bitmap variable above, 
             it is named "reducedbmp" as this is the image that will be turning less orange 
             a clone is made so that, as the coder, we can easily ensure a visual difference has been made */
 
+            greyscale(reducedBMP);
+
+            
+            for (int y = 0; y < reducedBMP.Height; y++)
+            {
+                for (int x = 0; x < reducedBMP.Width; x++)
+                {
+                    Color p = reducedBMP.GetPixel(x, y);
+                    int a = p.A;
+                    int r = p.R;
+                    int g = p.G;
+                    int b = p.B;
+
+                    int modifiedR = Convert.ToInt32(r * .5);
+                    int modifiedG = Convert.ToInt32(g * .5);
+                    int modifiedB = Convert.ToInt32(b * 0);
+
+                    reducedBMP.SetPixel(x, y, Color.FromArgb(a, modifiedR, modifiedG, 50));
+                }
+            }
+
+            lessYellow(reducedBMP);
+
+            // Here we set the the picture box on the form to equal the modifiedBMP.
+            pictureBox1.Image = reducedBMP;
+            
+        }
+
+
+        private static Bitmap lessYellow(Bitmap reducedBMP)
+        {
+            for(int y = 0; y < reducedBMP.Height; y++)
+            {
+                for (int x = 0; x < reducedBMP.Width; x++)
+                {
+                    Color p = reducedBMP.GetPixel(x, y);
+                    int a = p.A;
+                    int r = p.R;
+                    int g = p.G;
+                    int b = p.B;
+
+                    int modifiedR = Convert.ToInt32(r * .5);
+                    int modifiedG = Convert.ToInt32(g * .5);
+                    int modifiedB = Convert.ToInt32(b * 0);
+
+                    if (ColourTolerance(p, Color.FromArgb(a, 255, 255, 0), 170) == true)
+                    {
+                        reducedBMP.SetPixel(x, y, Color.FromArgb(a, r, g, 100));
+                    }
+                    
+                    //reducedBMP.SetPixel(x, y, Color.FromArgb(a, modifiedR, modifiedG, 150));
+                    
+
+                }
+            }
+
+            return reducedBMP;
+        }
+
+
+        private static Bitmap greyscale(Bitmap reducedBMP)
+        {
             for (int y = 0; y < reducedBMP.Height; y++)
             {
                 for (int x = 0; x < reducedBMP.Width; x++)
@@ -53,49 +115,13 @@ namespace Tinkering_Graphics
 
                     int avg = ((r + g + b) / 3);
                     reducedBMP.SetPixel(x, y, Color.FromArgb(a, avg, avg, avg));
-
-                    reducedBMP.SetPixel(x, y, Color.FromArgb(a, r, g, 150));
-
-                    int modifiedR = Convert.ToInt32(r * .7);
-                    int modifiedG = Convert.ToInt32(g * .8);
-                    int modifiedB = Convert.ToInt32(b * 0);
-                    /* above are the modifed variables used to edit the colour intensity in the picture
-                    as the orange intensity in the picture needs to be decreased, both red and green changed - blue a lot less*/
-
-
-                    /*
-                    if (Luminance(p) > 0 && Luminance(p) < 80)
-                    {
-                        reducedBMP.SetPixel(x, y, Color.FromArgb(a, avg, avg, 200));
-                        // at each pixel, it will be set to the same rgb value but r and g are reduced
-                        // this makes the forest fires look more "fake"
-                    }
-                    else if (Luminance(p) > 80)
-                    {
-                        reducedBMP.SetPixel(x, y, Color.FromArgb(a, avg, avg, 200));
-                    }
-                    */
+                    // sets img to greyscale
                     
-
-                    /*
-                    int modifiedR = Convert.ToInt32(r * .3);
-                    int modifiedG = Convert.ToInt32(g * .4);
-                    int modifiedB = Convert.ToInt32(b * .7);
-                    /* above are the modifed variables used to edit the colour intensity in the picture
-                    as the orange intensity in the picture needs to be decreased, both red and green changed - blue a lot less*/
-                    /*
-                    reducedBMP.SetPixel(x, y, Color.FromArgb(a, modifiedR, modifiedG, modifiedB));
-                    // at each pixel, it will be set to the same rgb value but r and g are reduced
-                    // this makes the forest fires look more "fake"
-                    */
-
                 }
             }
-
-            // Here we set the the picture box on the form to equal the modifiedBMP.
-            pictureBox1.Image = reducedBMP;
-            
+            return reducedBMP;
         }
+
 
         private static bool ColourDistance(Color pColour, Color imgColour)
         {
@@ -123,17 +149,7 @@ namespace Tinkering_Graphics
             }
         }
 
-        private int Luminance(Color color)
-        {
-            // colour = (r, g, b)
-            // must be 0 =< colour =< 255
-
-            // L = sum of all colour channels (r g b) / divided by 3
-            int l = ((color.R + color.G + color.B) / 3);
-            return l;
-        }
-
-        private bool ColourTolerance(Color color, Color pixel, int t)
+        private static bool ColourTolerance(Color pixel, Color color, int t)
         {
 
             // distance d = sum of(c0 - p0)^2 + (c1 - p2)^2 + (c2 - p2)^2)
@@ -151,10 +167,22 @@ namespace Tinkering_Graphics
 
         }
 
+        private int Luminance(Color color)
+        {
+            // colour = (r, g, b)
+            // must be 0 =< colour =< 255
+
+            // L = sum of all colour channels (r g b) / divided by 3
+            int l = ((color.R + color.G + color.B) / 3);
+            return l;
+        }
+
+        
+
 
         private void EffectButton_Click(object sender, EventArgs e)
         {
-            // Do the thing to make fires go brrr
+            // calls posterization function to turn the image fake
             Posterization();
         }
 
