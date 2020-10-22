@@ -8,7 +8,6 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 #region LISENCE
 /* LICENSE - MIT LICENSE 
  * Copyright (c) 2020 DAISY BAKER, MATTTHEW ROBERTS 
@@ -67,11 +66,11 @@ namespace Tinkering_Graphics
             Bitmap bmp = new Bitmap(Resource1.orangeSkyBridgeFires); // creates bitmap variable to hold the pixel data for the graphical image "img" called above
             Bitmap reducedBMP = new Bitmap(bmp);
 
-            
+
             // turns the image greyscale to mute the orange values for easier editing later on
             // without greyscale the image will turn out much pinker
             greyscale(reducedBMP);
-            
+
 
             for (int y = 0; y < reducedBMP.Height; y++)
             {
@@ -95,17 +94,17 @@ namespace Tinkering_Graphics
 
             // with increase the B value of specific areas on the img
             lessYellow(reducedBMP);
-            
+
             // Here we set the the picture box on the form to equal the modifiedBMP.
             pictureBox1.Image = reducedBMP;
-            
+
         }
         #endregion
 
         #region LESSYELLOW
         private static Bitmap lessYellow(Bitmap reducedBMP)
         {
-            for(int y = 0; y < reducedBMP.Height; y++)
+            for (int y = 0; y < reducedBMP.Height; y++)
             {
                 for (int x = 0; x < reducedBMP.Width; x++)
                 {
@@ -120,7 +119,7 @@ namespace Tinkering_Graphics
                     {
                         reducedBMP.SetPixel(x, y, Color.FromArgb(a, r, g, 75));
                     }
-                   
+
                 }
             }
 
@@ -244,7 +243,6 @@ namespace Tinkering_Graphics
                     reducedBMP.SetPixel(x, y, Color.FromArgb(a, modifiedR, modifiedG, modifiedB));
                 }
             }
-
             return reducedBMP;
         }
         #endregion
