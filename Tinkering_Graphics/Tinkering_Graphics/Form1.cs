@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -256,7 +258,55 @@ namespace Tinkering_Graphics
 
         private void DescriptionBox_Enter(object sender, EventArgs e)
         {
+            // This disables control on the text box so users can't change it
             ActiveControl = null;
         }
+
+        #region IMAGESAVING
+        void SavePicture()
+        {
+            // Here we create new version of the SaveFileDialogue method, and use some fancy syntax to add the params
+            SaveFileDialog sfd = new SaveFileDialog()
+            {
+                InitialDirectory = "C:\\",              // Set the initial dir that the user will see
+                Filter = "JPeg file (*.jpg)|*.jpg"      // jpg format
+                + "|PNG file (*.png)|*.png"             // png format
+                + "|TIFF file (*.tiff)|*.tiff",         // tiff format
+                // Start on PNG, most common file type
+                FilterIndex = 2,
+                // Set a title for the sfd
+                Title = "Save your file.."
+            };
+
+
+            // We want to test to make sure that there has actually been some result from the dialogue
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                /*This switch case uses the filter index to choose what image type will be saved.
+                  More statemnets can be added for more file types, but in this program the 
+                  chance of someone using anything than one of these 3 is slim.*/
+                switch (sfd.FilterIndex)
+                {
+                    case 1:
+                        pictureBox1.Image.Save(sfd.FileName, ImageFormat.Jpeg);     // Save jpg image
+                        break;
+                    case 2:
+                        pictureBox1.Image.Save(sfd.FileName, ImageFormat.Png);      // Save png image
+                        break;
+                    case 3:
+                        pictureBox1.Image.Save(sfd.FileName, ImageFormat.Tiff);     // Save tiff image
+                        break;
+                }
+                //Tell the console that the image has saved
+                Console.WriteLine("Image successfully saved");
+            }
+        }
+
+        private void SaveImageButton_Click(object sender, EventArgs e)
+        {
+            // Run the SavePicture function
+            SavePicture();
+        }
+#endregion
     }
 }
