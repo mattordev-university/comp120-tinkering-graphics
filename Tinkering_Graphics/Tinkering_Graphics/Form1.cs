@@ -9,6 +9,35 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+#region LISENCE
+/* LICENSE - MIT LICENSE 
+ * Copyright (c) 2020 DAISY BAKER, MATTTHEW ROBERTS 
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+ * 
+ * The MIT lisence has been chosen as it is a short and simple permissive license 
+ * meaning this work can be used commercially, this work can be modified as wanted
+ * and the compiled code and/or source can be distributed as nessecary. Essentially
+ * someone can do edit and distribute this code so long as this orginal copyright and
+ * license is included in any copy of the software/source.
+*/
+#endregion
+
 namespace Tinkering_Graphics
 {
     public partial class Form1 : Form
@@ -28,19 +57,21 @@ namespace Tinkering_Graphics
             pictureBox1.Image = bmp;
         }
 
+        #region POSTERIZATION
+        // this posterization function calls 3 more algorithim functions so that during the button press only one function used (for simplicity) 
         private void Posterization()
         {
-            Bitmap bmp = new Bitmap(Resource1.orangeSkyBridgeFires); // creates bitmap variable to hold the pixel data for the graphical image "img" called above
-
-            Bitmap reducedBMP = new Bitmap(bmp);
-
             /* this makes a clone of the orginal bmp bitmap variable above, 
             it is named "reducedbmp" as this is the image that will be turning less orange 
             a clone is made so that, as the coder, we can easily ensure a visual difference has been made */
+            Bitmap bmp = new Bitmap(Resource1.orangeSkyBridgeFires); // creates bitmap variable to hold the pixel data for the graphical image "img" called above
+            Bitmap reducedBMP = new Bitmap(bmp);
 
-            greyscale(reducedBMP);
+            
             // turns the image greyscale to mute the orange values for easier editing later on
             // without greyscale the image will turn out much pinker
+            greyscale(reducedBMP);
+            
 
             for (int y = 0; y < reducedBMP.Height; y++)
             {
@@ -57,20 +88,21 @@ namespace Tinkering_Graphics
                     int modifiedG = Convert.ToInt32(g * .5);
                     int modifiedB = Convert.ToInt32(b * 0);
 
-                    reducedBMP.SetPixel(x, y, Color.FromArgb(a, modifiedR, modifiedG, 50));
                     // use posterization for editing every pixel on img to a base level
+                    reducedBMP.SetPixel(x, y, Color.FromArgb(a, modifiedR, modifiedG, 50));
                 }
             }
 
-            lessYellow(reducedBMP);
             // with increase the B value of specific areas on the img
-
+            lessYellow(reducedBMP);
+            
             // Here we set the the picture box on the form to equal the modifiedBMP.
             pictureBox1.Image = reducedBMP;
             
         }
+        #endregion
 
-
+        #region LESSYELLOW
         private static Bitmap lessYellow(Bitmap reducedBMP)
         {
             for(int y = 0; y < reducedBMP.Height; y++)
@@ -94,8 +126,10 @@ namespace Tinkering_Graphics
 
             return reducedBMP;
         }
+        #endregion
 
 
+        #region GREYSCALE
         private static Bitmap greyscale(Bitmap reducedBMP)
         {
             for (int y = 0; y < reducedBMP.Height; y++)
@@ -109,18 +143,17 @@ namespace Tinkering_Graphics
                     int g = p.G;
                     int b = p.B;
 
-                    // reducedBMP.SetPixel(x, y, Color.FromArgb(a, r, g, 150));
-
+                    // sets img to greyscale
                     int avg = ((r + g + b) / 3);
                     reducedBMP.SetPixel(x, y, Color.FromArgb(a, avg, avg, avg));
-                    // sets img to greyscale
-                    
                 }
             }
             return reducedBMP;
         }
+        #endregion
 
 
+        #region COLOURDISTANCE
         private static bool ColourDistance(Color pColour, Color imgColour)
         {
             int redDiff;
@@ -134,9 +167,6 @@ namespace Tinkering_Graphics
 
             sqrt = Math.Sqrt((redDiff * redDiff) + (greenDiff * greenDiff) + (BlueDiff * BlueDiff));
 
-            // Console.WriteLine(sqrt);
-            // return sqrt;
-
             if (sqrt < 255)
             {
                 return true;
@@ -146,12 +176,14 @@ namespace Tinkering_Graphics
                 return false;
             }
         }
+        #endregion
 
 
+        #region COLOURTOLERANCE
         private static bool ColourTolerance(Color pixel, Color color, int t)
         {
 
-            // distance d = sum of(c0 - p0)^2 + (c1 - p2)^2 + (c2 - p2)^2)
+            // algorithim distance d = sum of(c0 - p0)^2 + (c1 - p2)^2 + (c2 - p2)^2)
             double d = (Math.Sqrt(color.R - pixel.R) + (color.G - pixel.G) + (color.B - pixel.B));
 
             if (d < t)
@@ -164,18 +196,20 @@ namespace Tinkering_Graphics
             }
 
         }
+        #endregion
 
+        #region LUMINANCE
+        // currently not in use 
         private static double Luminance(Color color)
         {
-            // colour = (r, g, b)
-            // must be 0 =< colour =< 255
-
             // L = sum of all colour channels (r g b) / divided by 3
             double l = ((color.R + color.G + color.B) / 3);
             return l;
         }
+        #endregion
 
 
+        #region INCREASELUMINANCE
         // attempted at a function to increase the brightness of an image to make the image look better
         // not in use
         private static Bitmap increaseLuminance(double l, Bitmap reducedBMP)
@@ -213,7 +247,7 @@ namespace Tinkering_Graphics
 
             return reducedBMP;
         }
-        
+        #endregion
 
 
         private void EffectButton_Click(object sender, EventArgs e)
