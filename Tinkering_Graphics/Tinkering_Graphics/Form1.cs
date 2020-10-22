@@ -88,10 +88,8 @@ namespace Tinkering_Graphics
                     {
                         reducedBMP.SetPixel(x, y, Color.FromArgb(a, r, g, 75));
                     }
-                   
                 }
             }
-
             return reducedBMP;
         }
 
@@ -114,7 +112,6 @@ namespace Tinkering_Graphics
                     int avg = ((r + g + b) / 3);
                     reducedBMP.SetPixel(x, y, Color.FromArgb(a, avg, avg, avg));
                     // sets img to greyscale
-                    
                 }
             }
             return reducedBMP;
@@ -162,7 +159,6 @@ namespace Tinkering_Graphics
             {
                 return false;
             }
-
         }
 
         private static double Luminance(Color color)
@@ -206,7 +202,6 @@ namespace Tinkering_Graphics
                     {
                         modifiedB = 255;
                     }
-
                     reducedBMP.SetPixel(x, y, Color.FromArgb(a, modifiedR, modifiedG, modifiedB));
                 }
             }
@@ -224,6 +219,7 @@ namespace Tinkering_Graphics
 
         private void DescriptionBox_Enter(object sender, EventArgs e)
         {
+            // This sets the description boxs control state to nothing so it can't be typed in.
             ActiveControl = null;
         }
     }
