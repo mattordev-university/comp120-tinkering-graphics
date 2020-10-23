@@ -50,6 +50,13 @@ namespace Tinkering_Graphics
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // This code is just so we can show what the image looks like beforehand.
+            Bitmap bmp = new Bitmap(Resource1.orangeSkyBridgeFires);
+            pictureBox1.Image = bmp;
+        }
+
         private void EffectButton_Click(object sender, EventArgs e)
         {
             /* calls posterization function to turn the image fake
@@ -63,13 +70,6 @@ namespace Tinkering_Graphics
         {
             // This disables control on the text box so users can't change it
             ActiveControl = null;
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            // This code is just so we can show what the image looks like beforehand.
-            Bitmap bmp = new Bitmap(Resource1.orangeSkyBridgeFires);
-            pictureBox1.Image = bmp;
         }
 
 
