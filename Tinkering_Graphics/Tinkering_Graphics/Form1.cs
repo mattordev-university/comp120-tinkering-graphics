@@ -50,12 +50,28 @@ namespace Tinkering_Graphics
             InitializeComponent();
         }
 
+        private void EffectButton_Click(object sender, EventArgs e)
+        {
+            /* calls posterization function to turn the image fake
+             * as posterization is a private void function which 
+             * calls other bitmap functions so this way most of 
+             * everything is in one spot */
+            Posterization();
+        }
+
+        private void DescriptionBox_Enter(object sender, EventArgs e)
+        {
+            // This disables control on the text box so users can't change it
+            ActiveControl = null;
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             // This code is just so we can show what the image looks like beforehand.
             Bitmap bmp = new Bitmap(Resource1.orangeSkyBridgeFires);
             pictureBox1.Image = bmp;
         }
+
 
         #region POSTERIZATION
         // this posterization function calls 3 more algorithim functions so that during the button press only one function used (for simplicity) 
@@ -201,18 +217,6 @@ namespace Tinkering_Graphics
         #endregion
 
 
-        private void EffectButton_Click(object sender, EventArgs e)
-        {
-            // calls posterization function to turn the image fake
-            Posterization();
-        }
-
-        private void DescriptionBox_Enter(object sender, EventArgs e)
-        {
-            // This disables control on the text box so users can't change it
-            ActiveControl = null;
-        }
-
         #region IMAGESAVING
         void SavePicture()
         {
@@ -258,6 +262,7 @@ namespace Tinkering_Graphics
             // Run the SavePicture function.
             SavePicture();
         }
-#endregion
+        #endregion
+
     }
 }
