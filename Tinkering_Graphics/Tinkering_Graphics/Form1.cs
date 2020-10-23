@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 // IMPORTANT LISENCE - MUST READ
-#region LISENCE
+#region LICENCE
 /* LICENSE - MIT LICENSE 
  * Copyright (c) 2020 DAISY BAKER, MATTTHEW ROBERTS 
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
