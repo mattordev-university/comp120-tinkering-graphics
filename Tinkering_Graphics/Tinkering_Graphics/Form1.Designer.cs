@@ -35,6 +35,7 @@
             this.EffectButton = new System.Windows.Forms.Button();
             this.Description = new System.Windows.Forms.Label();
             this.DescriptionBox = new System.Windows.Forms.TextBox();
+            this.SaveImageButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,9 +70,9 @@
             // 
             // EffectButton
             // 
-            this.EffectButton.Location = new System.Drawing.Point(656, 421);
+            this.EffectButton.Location = new System.Drawing.Point(653, 451);
             this.EffectButton.Name = "EffectButton";
-            this.EffectButton.Size = new System.Drawing.Size(290, 42);
+            this.EffectButton.Size = new System.Drawing.Size(303, 42);
             this.EffectButton.TabIndex = 5;
             this.EffectButton.Text = "Remove Fake Fires!";
             this.EffectButton.UseVisualStyleBackColor = true;
@@ -98,11 +99,22 @@
             this.DescriptionBox.Text = resources.GetString("DescriptionBox.Text");
             this.DescriptionBox.Enter += new System.EventHandler(this.DescriptionBox_Enter);
             // 
+            // SaveImageButton
+            // 
+            this.SaveImageButton.Location = new System.Drawing.Point(741, 421);
+            this.SaveImageButton.Name = "SaveImageButton";
+            this.SaveImageButton.Size = new System.Drawing.Size(127, 24);
+            this.SaveImageButton.TabIndex = 9;
+            this.SaveImageButton.Text = "Save Image";
+            this.SaveImageButton.UseVisualStyleBackColor = true;
+            this.SaveImageButton.Click += new System.EventHandler(this.SaveImageButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(980, 505);
+            this.Controls.Add(this.SaveImageButton);
             this.Controls.Add(this.DescriptionBox);
             this.Controls.Add(this.Description);
             this.Controls.Add(this.EffectButton);
@@ -126,6 +138,7 @@
         private System.Windows.Forms.Button EffectButton;
         private System.Windows.Forms.Label Description;
         private System.Windows.Forms.TextBox DescriptionBox;
+        private System.Windows.Forms.Button SaveImageButton;
     }
 }
 
