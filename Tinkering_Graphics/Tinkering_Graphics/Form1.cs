@@ -304,7 +304,7 @@ namespace Tinkering_Graphics
 
         private void SaveImageButton_Click(object sender, EventArgs e)
         {
-            // Run the SavePicture function
+            // Run the SavePicture function.
             SavePicture();
         }
 #endregion
