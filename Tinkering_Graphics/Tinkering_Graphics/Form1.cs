@@ -10,7 +10,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-#region LISENCE
+
+// IMPORTANT LISENCE - MUST READ
+#region LICENCE
 /* LICENSE - MIT LICENSE 
  * Copyright (c) 2020 DAISY BAKER, MATTTHEW ROBERTS 
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -43,9 +45,6 @@ namespace Tinkering_Graphics
 {
     public partial class Form1 : Form
     {
-        //This is no longer required! For using images, please now use `Resource1.forestFires` instead (refer to examples in the code below if needed).
-        //public string img = "G:\\GitRepos\\comp120-tinkering-graphics\\Tinkering_Graphics\\forestFires.jpg";
-
         public Form1()
         {
             InitializeComponent();
@@ -53,7 +52,7 @@ namespace Tinkering_Graphics
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //This is just so we can show what the image looks like beforehand.
+            // This code is just so we can show what the image looks like beforehand.
             Bitmap bmp = new Bitmap(Resource1.orangeSkyBridgeFires);
             pictureBox1.Image = bmp;
         }
@@ -63,39 +62,50 @@ namespace Tinkering_Graphics
         private void Posterization()
         {
             /* this makes a clone of the orginal bmp bitmap variable above, 
-            it is named "reducedbmp" as this is the image that will be turning less orange 
-            a clone is made so that, as the coder, we can easily ensure a visual difference has been made */
-            Bitmap bmp = new Bitmap(Resource1.orangeSkyBridgeFires); // creates bitmap variable to hold the pixel data for the graphical image "img" called above
+             * it is named "reducedbmp" as this is the image that will be 
+             * turning fake. */
+            Bitmap bmp = new Bitmap(Resource1.orangeSkyBridgeFires); 
             Bitmap reducedBMP = new Bitmap(bmp);
 
 
-            // turns the image greyscale to mute the orange values for easier editing later on
-            // without greyscale the image will turn out much pinker
+            /* turns the image greyscale to mute the orange values this makes 
+             * easier editing later on without greyscale the image will turn 
+             * out much pinker */
             greyscale(reducedBMP);
 
 
+            /* this for loop is used to grab every pixel from the image
+             * everything inside the foor loop will affect only the pixel
+             * in the loop at the time */
             for (int y = 0; y < reducedBMP.Height; y++)
             {
                 for (int x = 0; x < reducedBMP.Width; x++)
                 {
-                    // this new for loop is important to grab the new greyscaled pixels
+                    /* this for loop grabs the new greyscaled pixels making
+                     * a huge difference in the final outcome */
                     Color p = reducedBMP.GetPixel(x, y);
+
+                    // variables to grab the argb values
                     int a = p.A;
                     int r = p.R;
                     int g = p.G;
                     int b = p.B;
 
+                    // takes the variables above and modifies them to be used within the setpixel
                     int modifiedR = Convert.ToInt32(r * .5);
                     int modifiedG = Convert.ToInt32(g * .5);
-                    int modifiedB = Convert.ToInt32(b * 0);
 
-                    // use posterization for editing every pixel on img to a base level
+                    // sets the pixel to the modified r and g values and a set b value
                     reducedBMP.SetPixel(x, y, Color.FromArgb(a, modifiedR, modifiedG, 50));
                 }
             }
 
-            // with increase the B value of specific areas on the img
+
+            /* the lessYellow function finds pixel that are within a 
+             * particular threshold to the colour yellow and will 
+             * increase the blue value within in them more */
             lessYellow(reducedBMP);
+
 
             // Here we set the the picture box on the form to equal the modifiedBMP.
             pictureBox1.Image = reducedBMP;
@@ -103,28 +113,34 @@ namespace Tinkering_Graphics
         }
         #endregion
 
+
         #region LESSYELLOW
         private static Bitmap lessYellow(Bitmap reducedBMP)
         {
+            // for loop to grab each pixel in the image
             for (int y = 0; y < reducedBMP.Height; y++)
             {
                 for (int x = 0; x < reducedBMP.Width; x++)
                 {
-                    // this new for loop is important to grab the new greyscaled pixels
+                    /* creates variable p to hold the pixel 
+                     * of particular iteration of the for loop */
                     Color p = reducedBMP.GetPixel(x, y);
+
+                    // variables to grab the argb values
                     int a = p.A;
                     int r = p.R;
                     int g = p.G;
                     int b = p.B;
 
+                    // if p is within threshold to another colour
                     if (ColourTolerance(p, Color.FromArgb(a, 255, 255, 0), 190) == true)
                     {
+                        // then the pixel will stay the same expect for the blue value, this is increased to a set value
                         reducedBMP.SetPixel(x, y, Color.FromArgb(a, r, g, 75));
                     }
-
                 }
             }
-
+            // wil now return the changed reducedBMP
             return reducedBMP;
         }
         #endregion
@@ -133,49 +149,32 @@ namespace Tinkering_Graphics
         #region GREYSCALE
         private static Bitmap greyscale(Bitmap reducedBMP)
         {
+            // for loop to grab each pixel in the image
             for (int y = 0; y < reducedBMP.Height; y++)
             {
                 for (int x = 0; x < reducedBMP.Width; x++)
                 {
-                    // Create a color, and then asign each channel of that color an int for later use.
+                    /* creates variable p to hold the pixel 
+                     * of particular iteration of the for loop */
                     Color p = reducedBMP.GetPixel(x, y);
+
+                    // variables to grab the argb values
                     int a = p.A;
                     int r = p.R;
                     int g = p.G;
                     int b = p.B;
 
-                    // sets img to greyscale
+                    /* creates variable avg which takes the sum of all three 
+                     * colour values (r, g and b) and divided by 3 */
                     int avg = ((r + g + b) / 3);
+
+                    /* keeps a as the orginal a value but sets all 3 rgb colour 
+                     * values to avg which makes it greyscale */
                     reducedBMP.SetPixel(x, y, Color.FromArgb(a, avg, avg, avg));
                 }
             }
+
             return reducedBMP;
-        }
-        #endregion
-
-
-        #region COLOURDISTANCE
-        private static bool ColourDistance(Color pColour, Color imgColour)
-        {
-            int redDiff;
-            int greenDiff;
-            int BlueDiff;
-            double sqrt;
-
-            redDiff = pColour.R - imgColour.R;
-            greenDiff = pColour.G - imgColour.G;
-            BlueDiff = pColour.B - imgColour.B;
-
-            sqrt = Math.Sqrt((redDiff * redDiff) + (greenDiff * greenDiff) + (BlueDiff * BlueDiff));
-
-            if (sqrt < 255)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
         }
         #endregion
 
@@ -183,10 +182,13 @@ namespace Tinkering_Graphics
         #region COLOURTOLERANCE
         private static bool ColourTolerance(Color pixel, Color color, int t)
         {
-
-            // algorithim distance d = sum of(c0 - p0)^2 + (c1 - p2)^2 + (c2 - p2)^2)
+            /* algorithm - distance d = sum of(c0 - p0)^2 + (c1 - p2)^2 + (c2 - p2)^2)
+             * sqaures the sum of c+p 0 to 2 */
             double d = (Math.Sqrt(color.R - pixel.R) + (color.G - pixel.G) + (color.B - pixel.B));
 
+            /* if d, distance, is less than threshold return as true
+             * if true is returned we know that our pixel is close to 
+             * a colour we specified */
             if (d < t)
             {
                 return true;
@@ -195,57 +197,6 @@ namespace Tinkering_Graphics
             {
                 return false;
             }
-
-        }
-        #endregion
-
-        #region LUMINANCE
-        // currently not in use 
-        private static double Luminance(Color color)
-        {
-            // L = sum of all colour channels (r g b) / divided by 3
-            double l = ((color.R + color.G + color.B) / 3);
-            return l;
-        }
-        #endregion
-
-
-        #region INCREASELUMINANCE
-        // attempted at a function to increase the brightness of an image to make the image look better
-        // not in use
-        private static Bitmap increaseLuminance(double l, Bitmap reducedBMP)
-        {
-            for (int y = 0; y < reducedBMP.Height; y++)
-            {
-                for (int x = 0; x < reducedBMP.Width; x++)
-                {
-                    Color p = reducedBMP.GetPixel(x, y);
-                    int a = p.A;
-                    int r = p.R;
-                    int g = p.G;
-                    int b = p.B;
-
-                    int modifiedR = Convert.ToInt32(r * 1.1);
-                    int modifiedG = Convert.ToInt32(g * 1.1);
-                    int modifiedB = Convert.ToInt32(b * 1.1);
-
-                    if (modifiedR > 255)
-                    {
-                        modifiedR = 255;
-                    }
-                    if (modifiedG > 255)
-                    {
-                        modifiedG = 255;
-                    }
-                    if (modifiedB > 255)
-                    {
-                        modifiedB = 255;
-                    }
-
-                    reducedBMP.SetPixel(x, y, Color.FromArgb(a, modifiedR, modifiedG, modifiedB));
-                }
-            }
-            return reducedBMP;
         }
         #endregion
 
